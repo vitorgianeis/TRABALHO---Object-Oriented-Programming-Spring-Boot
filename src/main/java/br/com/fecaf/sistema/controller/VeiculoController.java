@@ -51,6 +51,8 @@ public class VeiculoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletar(@PathVariable Long id) {
         try {
+             // ABSTRAÇÃO: O Controller não sabe o que acontece aqui dentro.
+            // Ele apenas delega a responsabilidade para o Service
             veiculoService.deletar(id);
             return ResponseEntity.ok("Veículo removido com sucesso!");
         } catch (RuntimeException e) {

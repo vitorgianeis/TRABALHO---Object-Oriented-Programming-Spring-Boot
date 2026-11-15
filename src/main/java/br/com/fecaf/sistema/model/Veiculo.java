@@ -8,6 +8,7 @@ import java.math.BigDecimal;
     @Index(name = "idx_veiculo_status", columnList = "status"),
     @Index(name = "idx_veiculo_ano", columnList = "ano")
 })
+//classe Veiculo representa um veículo no sistema, com atributos como modelo, ano, cor, preço, quilometragem e status.
 public class Veiculo {
 
     @Id
@@ -19,6 +20,7 @@ public class Veiculo {
                 foreignKey = @ForeignKey(name = "fk_veiculo_modelo"))
     private Modelo modelo;
 
+    // Atributos do veículo
     @Column(nullable = false)
     private Integer ano;
 
@@ -34,6 +36,9 @@ public class Veiculo {
     @Column(nullable = false, length = 20)
     private String status = "DISPONIVEL";
 
+    //// --- MÉTODOS (O comportamento do objeto) ---
+    // O encapsulamento é aplicado aqui: os atributos são private, 
+    // e o acesso a eles é feito APENAS por estes métodos públicos (Getters e Setters)
     // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -52,7 +57,7 @@ public class Veiculo {
 
 
 
-    @Column(name = "foto_url")
+    @Column(name = "foto_url", length = 1000)
     private String fotoUrl;
 
     public String getFotoUrl() { return fotoUrl; }
