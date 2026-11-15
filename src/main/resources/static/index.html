@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Automotivo - Gestão de Estoque</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>🚗 Gestão de Estoque de Veículos</h1>
+    </header>
+
+    <main>
+        <!-- SEÇÃO DE CADASTROS -->
+        <section class="cadastros">
+            <div class="card">
+                <h2>Cadastrar Marca</h2>
+                <form id="form-marca">
+                    <input type="text" id="marca-nome" placeholder="Nome da Marca (ex: Toyota)" required>
+                    <button type="submit">Salvar Marca</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>Cadastrar Modelo</h2>
+                <form id="form-modelo">
+                    <input type="text" id="modelo-nome" placeholder="Nome do Modelo (ex: Corolla)" required>
+                    <select id="modelo-marca" required>
+                        <option value="">Selecione a Marca...</option>
+                    </select>
+                    <button type="submit">Salvar Modelo</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>Cadastrar Veículo</h2>
+                <form id="form-veiculo">
+                    <select id="veiculo-modelo" required>
+                        <option value="">Selecione o Modelo...</option>
+                    </select>
+                    <input type="number" id="veiculo-ano" placeholder="Ano (ex: 2024)" required>
+                    <input type="text" id="veiculo-cor" placeholder="Cor (ex: Prata)" required>
+                    <input type="text" id="veiculo-preco" placeholder="Preço (ex: 100.000,00)" required>
+                    <input type="number" step="0.01" id="veiculo-km" placeholder="Quilometragem" required>
+                    <select id="veiculo-status" required>
+                        <option value="DISPONIVEL">Disponível</option>
+                        <option value="RESERVADO">Reservado</option>
+                        <option value="VENDIDO">Vendido</option>
+                        <option value="DESCONTINUADO">Descontinuado</option>
+                    </select>
+                    <input type="url" id="veiculo-foto" placeholder="URL da Foto (ex: https://...)">
+                    <button type="submit">Salvar Veículo</button>
+                </form>
+            </div>
+        </section>
+
+        <hr>
+
+        <!-- DASHBOARD DE INDICADORES -->
+        <section class="dashboard">
+            <div class="card-dash">
+                <h3>Total de Veículos</h3>
+                <p id="dash-total">0</p>
+            </div>
+            <div class="card-dash">
+                <h3>Disponíveis no Estoque</h3>
+                <p id="dash-disponiveis" style="color: #16a34a;">0</p>
+            </div>
+            <div class="card-dash">
+                <h3>Valor do Estoque (Disponíveis)</h3>
+                <p id="dash-valor" style="color: #2563eb;">R$ 0,00</p>
+            </div>
+        </section>
+
+        <!-- SEÇÃO DE FILTROS E LISTAGEM (CARDS) -->
+        <section class="estoque">
+            <h2>Veículos em Estoque</h2>
+            
+            <div class="filtros">
+                <select id="filtro-marca" onchange="atualizarFiltroModelo()">
+                    <option value="">Todas as Marcas</option>
+                </select>
+                
+                <select id="filtro-modelo">
+                    <option value="">Todos os Modelos</option>
+                </select>
+                
+                <input type="number" id="filtro-ano" placeholder="Ano exato">
+                <input type="text" id="filtro-preco" placeholder="Preço Máximo">
+                
+                <select id="filtro-status">
+                    <option value="">Todos os Status</option>
+                    <option value="DISPONIVEL">Disponível</option>
+                    <option value="RESERVADO">Reservado</option>
+                    <option value="VENDIDO">Vendido</option>
+                    <option value="DESCONTINUADO">Descontinuado</option>
+                </select>
+                
+                <button onclick="carregarVeiculos()">Filtrar</button>
+                <button onclick="limparFiltros()" style="background-color: #6b7280;">Limpar</button>
+            </div>
+
+            <p id="contador-resultados" style="margin-bottom: 15px; font-weight: bold; color: #4b5563;"></p>
+
+            <div id="lista-veiculos" class="grid-veiculos">
+                <!-- Cards gerados pelo JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL DE EDIÇÃO DE VEÍCULO -->
+    <div id="modal-editar" class="modal">
+        <div class="modal-content">
+            <h2>Editar Veículo</h2>
+            <p id="edit-nome-veiculo" style="margin-bottom: 15px; color: #3b82f6; font-weight: bold; font-size: 1.1rem;"></p>
+            
+            <form id="form-editar">
+                <input type="hidden" id="edit-id">
+                
+                <label>Preço:</label>
+                <input type="text" id="edit-preco" required>
+                
+                <label>Quilometragem:</label>
+                <input type="number" step="0.01" id="edit-km" required>
+                
+                <label>Status de Disponibilidade:</label>
+                <select id="edit-status" required>
+                    <option value="DISPONIVEL">Disponível</option>
+                    <option value="RESERVADO">Reservado</option>
+                    <option value="VENDIDO">Vendido</option>
+                    <option value="DESCONTINUADO">Descontinuado</option>
+                </select>
+                
+                <div class="modal-botoes">
+                    <button type="button" onclick="fecharModal()" class="btn-cancelar">Cancelar</button>
+                    <button type="submit" class="btn-salvar">Salvar Alterações</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
