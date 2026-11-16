@@ -11,7 +11,9 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+//
+// temos a camada REST. 
+// O VeiculoController é responsável por receber as requisições HTTP (GET, POST, PUT, DELETE) do nosso Frontend, processar os dados em formato JSON e devolver as respostas."
 @RestController
 @RequestMapping("/api/veiculos")
 @CrossOrigin(origins = "*")
@@ -23,11 +25,12 @@ public class VeiculoController {
     @Autowired
     private VeiculoRepository veiculoRepository; // Necessário para o Dashboard
 
+    //cadastar um veiculo
     @PostMapping
     public Veiculo cadastrar(@RequestBody Veiculo veiculo) {
         return veiculoService.salvar(veiculo);
     }
-
+    //listar veiculos
     @GetMapping
     public List<Veiculo> filtrar(
             @RequestParam(required = false) Long marcaId,
@@ -38,6 +41,7 @@ public class VeiculoController {
         return veiculoService.filtrar(marcaId, modeloId, precoMax, ano, status);
     }
 
+    //alterar os dados do veiculo
     @PutMapping("/{id}")
     public ResponseEntity<Veiculo> atualizar(@PathVariable Long id, @RequestBody Veiculo dadosAtualizados) {
         try {
@@ -48,6 +52,7 @@ public class VeiculoController {
         }
     }
 
+    //excluir ou remover do estoque
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletar(@PathVariable Long id) {
         try {

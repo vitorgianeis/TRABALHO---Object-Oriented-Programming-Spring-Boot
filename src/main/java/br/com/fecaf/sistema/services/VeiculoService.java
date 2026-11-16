@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 
+//fica a camada de regras de negócio. 
+// É aqui que o sistema valida se um carro pode ou não ser excluído, por exemplo."
 @Service
 public class VeiculoService {
 

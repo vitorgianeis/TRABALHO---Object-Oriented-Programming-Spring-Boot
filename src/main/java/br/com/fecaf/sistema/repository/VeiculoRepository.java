@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import java.math.BigDecimal;
 import java.util.List;
 
+//temos as interfaces que herdam do JpaRepository. 
+// Elas são responsáveis pela comunicação direta com o banco de dados, nos poupando de escrever SQL manual."
 @Repository
 public interface VeiculoRepository extends JpaRepository<Veiculo, Long> {
 
